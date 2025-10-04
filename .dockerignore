@@ -1,0 +1,13 @@
+# .dockerignore
+
+# Ignorar dependencias locales
+node_modules
+
+# Ignorar la carpeta de salida de la compilación
+dist
+
+# Ignorar ficheros de entorno
+.env
+
+# Ignorar logs de npm
+npm-debug.log

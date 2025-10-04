@@ -1,0 +1,45 @@
+# docker-compose.yml (versión para desarrollo)
+
+services:
+  app-nodejs:
+    build: .
+    container_name: videogames-app-nodejs
+    ports:
+      - "8000:8000"
+    volumes:
+      # Sincroniza toda la carpeta local con la del contenedor.
+      # Así, nodemon detectará cambios en cualquier archivo (.ts, .json, etc.).
+      - .:/app
+    env_file:
+      - .env
+    networks:
+      - app-network
+    depends_on:
+      - db
+    # ¡Comando Clave! Le dice al contenedor que se inicie usando el script "dev".
+    command: npm run dev
+
+  db:
+    image: mysql:8.0
+    container_name: videogames-db-mysql-nodejs
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
