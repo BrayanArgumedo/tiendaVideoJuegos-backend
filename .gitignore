@@ -3,3 +3,7 @@ node_modules/
 
 # Ficheros de entorno
 .env
+
+# Archivos subidos por usuarios
+uploads/**/*
+!uploads/**/.gitkeep
