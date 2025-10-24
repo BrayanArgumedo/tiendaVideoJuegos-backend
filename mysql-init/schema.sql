@@ -49,6 +49,8 @@ CREATE TABLE `pedidos` (
   `costo_envio` DECIMAL(10,2) NOT NULL,
   `total` DECIMAL(10,2) NOT NULL,
   `estado` ENUM('procesando', 'enviado', 'completado', 'cancelado') NOT NULL DEFAULT 'procesando',
+  `metodo_envio` VARCHAR(20) DEFAULT NULL,          -- ⬅️ AGREGAR ESTA LÍNEA
+  `direccion_envio` TEXT DEFAULT NULL,              -- ⬅️ AGREGAR ESTA LÍNEA
   `fecha_pedido` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_pedidos_usuarios_idx` (`usuario_id`),

@@ -2,9 +2,11 @@
 
 import express from 'express';
 import cors from 'cors';
-import path from 'path';  // ← NUEVO
+import path from 'path';
 import userRoutes from './features/usuarios/infrastructure/user.routes';
-import productRoutes from './features/productos/infrastructure/product.routes';  // ← NUEVO
+import productRoutes from './features/productos/infrastructure/product.routes';
+import orderRoutes from './features/pedidos/infrastructure/order.routes';
+import reportRoutes from './features/reportes/infrastructure/report.routes';  
 
 const app = express();
 
@@ -33,9 +35,6 @@ app.use(express.urlencoded({ extended: true }));
  * 
  * Ruta URL: http://localhost:8000/uploads/productos/imagen.jpg
  * Ruta física: TiendaVideogames/uploads/productos/imagen.jpg
- * 
- * express.static busca archivos en la carpeta especificada
- * y los sirve directamente sin procesamiento
  */
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
@@ -53,7 +52,20 @@ app.use('/api/usuarios', userRoutes);
  * Rutas de productos
  * Base: /api/productos
  */
-app.use('/api/productos', productRoutes);  // ← NUEVO
+app.use('/api/productos', productRoutes);
+
+/**
+ * Rutas de pedidos
+ * Base: /api/pedidos
+ */
+app.use('/api/pedidos', orderRoutes);  
+
+/**
+ * Rutas de reportes
+ * Base: /api
+ */
+app.use('/api', reportRoutes);  
+
 
 // ====================================
 // RUTA DE PRUEBA (Health Check)
@@ -66,7 +78,9 @@ app.get('/', (req, res) => {
     endpoints: {
       usuarios: '/api/usuarios',
       productos: '/api/productos',
-      uploads: '/uploads'  // ← NUEVO
+      pedidos: '/api/pedidos',      
+      reportes: '/api/pedidos/:id/factura/pdf', 
+      uploads: '/uploads'
     }
   });
 });
