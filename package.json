@@ -1,14 +1,18 @@
 {
   "name": "tiendavideogames",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend API para tienda de videojuegos con Node.js, Express y MySQL",
+  "main": "dist/server.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts"
   },
-  "keywords": [],
+  "keywords": ["videogames", "api", "express", "mysql"],
   "author": "",
   "license": "ISC",
   "dependencies": {
