@@ -72,17 +72,26 @@ app.use('/api', reportRoutes);
 // ====================================
 
 app.get('/', (req, res) => {
-  res.json({
+  console.log('✅ Healthcheck recibido desde:', req.ip);
+  res.status(200).json({
     message: 'API de GameTrade funcionando correctamente',
     version: '1.0.0',
+    status: 'ok',
+    timestamp: new Date().toISOString(),
     endpoints: {
       usuarios: '/api/usuarios',
       productos: '/api/productos',
-      pedidos: '/api/pedidos',      
-      reportes: '/api/pedidos/:id/factura/pdf', 
+      pedidos: '/api/pedidos',
+      reportes: '/api/pedidos/:id/factura/pdf',
       uploads: '/uploads'
     }
   });
+});
+
+// Healthcheck adicional más simple
+app.get('/health', (req, res) => {
+  console.log('✅ /health check');
+  res.status(200).send('OK');
 });
 
 // ====================================

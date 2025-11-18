@@ -19,7 +19,8 @@ COPY . .
 RUN npm run build
 
 # 7. Expone el puerto que Railway asignará automáticamente.
-EXPOSE 8000
+# Railway usa la variable $PORT dinámicamente
+EXPOSE 8080
 
 # 8. Comando para iniciar la aplicación en producción
 CMD ["npm", "start"]
