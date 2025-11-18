@@ -7,7 +7,7 @@ import { Queue } from './core/structures/Queue';
 import { EmailTask } from './core/patterns/observer/EmailObserver';
 import { EmailWorker } from './workers/email.worker';
 
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT || '3000', 10);
 
 const startServer = async () => {
   console.log('🔧 Iniciando servidor...');
