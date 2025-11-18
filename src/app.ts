@@ -14,6 +14,12 @@ const app = express();
 // MIDDLEWARES GLOBALES
 // ====================================
 
+// Logging de todas las peticiones
+app.use((req, res, next) => {
+  console.log(`📥 ${req.method} ${req.path} - IP: ${req.ip} - Headers: ${JSON.stringify(req.headers)}`);
+  next();
+});
+
 // CORS - Permitir peticiones desde Angular (localhost:4200)
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:4200',
