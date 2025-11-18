@@ -10,6 +10,14 @@ import { EmailWorker } from './workers/email.worker';
 const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
+  console.log('🔧 Iniciando servidor...');
+  console.log('📍 Puerto:', PORT);
+  console.log('🔌 DB Host:', process.env.DB_HOST || 'NO DEFINIDO');
+  console.log('👤 DB User:', process.env.DB_USER || 'NO DEFINIDO');
+  console.log('🔑 DB Password:', process.env.DB_PASSWORD ? '***DEFINIDO***' : 'NO DEFINIDO');
+  console.log('💾 DB Database:', process.env.DB_DATABASE || 'NO DEFINIDO');
+
+  console.log('🔄 Conectando a la base de datos...');
   await connectDB();
   
   // Construir índice de productos
